@@ -85,7 +85,7 @@ const Header = () => {
       <h2>Full-Stack Web Developer</h2>
       <SocialLinks>
         <IconLink
-          href='https://github.com/robert-username'
+          href='https://github.com/takuhartley'
           target='_blank'
           rel='noopener noreferrer'
           aria-label="Robert's GitHub"
@@ -93,7 +93,7 @@ const Header = () => {
           <FaGithub />
         </IconLink>
         <IconLink
-          href='https://linkedin.com/in/robert-username'
+          href='https://www.linkedin.com/in/robin-hartley/'
           target='_blank'
           rel='noopener noreferrer'
           aria-label="Robert's LinkedIn"
@@ -101,7 +101,7 @@ const Header = () => {
           <FaLinkedin />
         </IconLink>
         <IconLink
-          href='https://medium.com/@robert-username'
+          href='https://medium.com/@robin.taku.hartley'
           target='_blank'
           rel='noopener noreferrer'
           aria-label="Robert's Medium"
