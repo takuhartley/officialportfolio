@@ -6,6 +6,12 @@ const CHART_HEIGHT = 300
 const CHART_MARGIN = { top: 20, right: 20, bottom: 50, left: 50 }
 
 const chartStyles = {
+  chartContainer: {
+    marginBottom: '30px', // Spacing between charts
+    padding: '10px 0', // Padding inside the chart container
+    background: '#f7f7f7',
+    borderRadius: '10px'
+  },
   visitors: {
     backgroundColor: 'rgba(255, 99, 132, 0.2)',
     borderColor: 'rgba(255, 99, 132, 1)',
@@ -56,7 +62,10 @@ const setupScales = data => {
 
 const drawAxes = (svg, x, y) => {
   const xAxis = d3.axisBottom(x)
-  const yAxis = d3.axisLeft(y)
+  const yAxis = d3
+    .axisLeft(y)
+    .ticks(5)
+    .tickSize(-CHART_WIDTH + CHART_MARGIN.left + CHART_MARGIN.right) // Adding gridlines
 
   svg
     .append('g')
@@ -67,6 +76,8 @@ const drawAxes = (svg, x, y) => {
     .append('g')
     .attr('transform', `translate(${CHART_MARGIN.left},0)`)
     .call(yAxis)
+    .selectAll('.tick line') // Styling for gridlines
+    .attr('stroke', '#e5e5e5')
 }
 
 const Charts = () => {
@@ -126,11 +137,11 @@ const Charts = () => {
 
   return (
     <>
-      <div>
+      <div style={chartStyles.chartContainer}>
         <h2>Website Visitors</h2>
         <div ref={visitorsRef}></div>
       </div>
-      <div>
+      <div style={chartStyles.chartContainer}>
         <h2>Button Clicks</h2>
         <div ref={buttonClickRef}></div>
       </div>

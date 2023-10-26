@@ -1,40 +1,52 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Canvas } from '@react-three/fiber'
-import { Box } from '@react-three/drei'
 import { useSpring, animated } from 'react-spring'
+import { FaGithub, FaLinkedin, FaMediumM } from 'react-icons/fa'
+import EmojiParticles from '../EmojiParticles'
 
-// Canvas Scene
-const Scene = () => (
-  <Box args={[1, 1, 1]} rotation={[Math.PI / 5, Math.PI / 5, 0]}>
-    <meshStandardMaterial attach='material' color='royalblue' />
-  </Box>
-)
-
+// Colors based on your preference
+const colors = {
+  primary: '#001F3F',
+  secondary: '#FFD700',
+  accent: '#007BFF',
+  background: '#FAFAFA',
+  text: '#333333',
+  highlight: '#FF6B6B',
+  neutral: '#E5E5E5'
+}
 // Styled Components
 const HeaderContainer = styled.header`
+  background-color: ${colors.primary};
+  padding: 4rem 0;
   position: relative;
   overflow: hidden;
-  background-color: #282c34;
-  color: white;
-  padding: 2rem 0;
+  text-align: center;
+  z-index: 1;
+`
 
-  h1,
-  h2 {
-    text-align: center;
+const SocialLinks = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  z-index: 1;
+  a {
+    color: ${colors.background};
+    font-size: 1.5rem;
+
+    &:hover {
+      color: ${colors.secondary}; // Highlight color
+    }
   }
 `
+const IconLink = styled.a`
+  color: ${colors.background};
+  font-size: 1.5rem;
 
-const ThreeCanvas = styled(Canvas)`
-  position: absolute !important;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-  opacity: 0.7;
+  &:hover {
+    color: ${colors.secondary};
+  }
 `
-
 const AboutSection = styled.div`
   display: flex;
   align-items: center;
@@ -42,7 +54,7 @@ const AboutSection = styled.div`
   max-width: 800px;
   margin: 2rem auto 0;
   padding: 0 1rem;
-
+  z-index: 1;
   img {
     width: 200px;
     height: 200px;
@@ -57,28 +69,47 @@ const AboutSection = styled.div`
   }
 `
 
-// For page-load animation
 const AnimatedAbout = animated(AboutSection)
 
-// Component
 const Header = () => {
   const fadeIn = useSpring({
-    from: { opacity: 0, transform: 'translateY(-20px)' },
-    to: { opacity: 1, transform: 'translateY(0)' },
+    from: { opacity: 0 },
+    to: { opacity: 1 },
     delay: 500
   })
 
   return (
     <HeaderContainer>
-      <ThreeCanvas camera={{ position: [0, 0, 5] }}>
-        <ambientLight />
-        <pointLight position={[10, 10, 10]} />
-        <Scene />
-      </ThreeCanvas>
+      <EmojiParticles />
       <h1>Robert's Portfolio</h1>
       <h2>Full-Stack Web Developer</h2>
+      <SocialLinks>
+        <IconLink
+          href='https://github.com/robert-username'
+          target='_blank'
+          rel='noopener noreferrer'
+          aria-label="Robert's GitHub"
+        >
+          <FaGithub />
+        </IconLink>
+        <IconLink
+          href='https://linkedin.com/in/robert-username'
+          target='_blank'
+          rel='noopener noreferrer'
+          aria-label="Robert's LinkedIn"
+        >
+          <FaLinkedin />
+        </IconLink>
+        <IconLink
+          href='https://medium.com/@robert-username'
+          target='_blank'
+          rel='noopener noreferrer'
+          aria-label="Robert's Medium"
+        >
+          <FaMediumM />
+        </IconLink>
+      </SocialLinks>
       <AnimatedAbout style={fadeIn}>
-        <img src='https://via.placeholder.com/200' alt="Robert's Photo" />
         <div>
           <p>
             Passionate developer with experience in modern web technologies.

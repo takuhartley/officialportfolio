@@ -15,7 +15,11 @@ const fadeInFromTop = keyframes`
 `
 
 const Details = styled.div`
+  height: 100vh;
   animation: ${fadeInFromTop} 0.5s ease-in-out;
+  background-color: #fafafa;
+  color: #333333;
+  font-family: Arial, sans-serif;
   @media (max-width: 768px) {
     padding: 20px;
   }
@@ -27,7 +31,6 @@ const ImageBackground = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   height: 40vh;
-  opacity: 0.95;
   position: relative;
 `
 
@@ -40,25 +43,22 @@ const ImageOverlay = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(
-    0,
-    0,
-    0,
-    0.1
-  ); // adding a slight dark overlay for text visibility
-  color: white;
+  background: rgba(0, 0, 0, 0.4);
+  color: #ffd700;
   font-size: 2em;
+  font-weight: bold;
 `
 
 const Divider = styled.div`
-  border-bottom: 1px solid #e1e4e8;
-  border-left: 1px solid #e1e4e8;
+  border-bottom: 2px solid #e5e5e5;
   margin: 20px 0;
 `
 
 const Content = styled.div`
   display: flex;
   flex-direction: row;
+  border: 1px solid #e5e5e5;
+  padding: 20px;
   @media (max-width: 768px) {
     flex-direction: column;
   }
@@ -67,10 +67,13 @@ const Content = styled.div`
 const Section = styled.div`
   flex: 1;
   padding: 20px;
+  &:not(:last-child) {
+    border-right: 1px solid #e5e5e5;
+  }
 `
 
 const TechTag = styled.button`
-  background-color: #0077cc;
+  background-color: #007bff;
   color: white;
   border: none;
   border-radius: 5px;
@@ -82,12 +85,19 @@ const TechTag = styled.button`
   }
 `
 
+const LinkStyled = styled.a`
+  color: #007bff;
+  text-decoration: none;
+  &:hover {
+    color: #005fa3;
+  }
+`
+
 const ProjectDetails = () => {
-  const { projectTitle } = useParams()
-  const project = projects.find(p => p.title === projectTitle)
+  const { projectId } = useParams()
+  const project = projects.find(p => p.id === parseInt(projectId, 10))
 
   if (!project) return <div>Project not found!</div>
-
   return (
     <Details>
       <ImageBackground src={project.projectImage}>
